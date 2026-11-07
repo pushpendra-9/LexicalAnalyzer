@@ -1,33 +1,79 @@
-C Lexical Analyzer
+# C Lexical Analyzer
 
-A C-based lexical analyzer project for Compiler Design that reads a C source file, identifies lexemes, and classifies them into different token categories.
+A **C-based lexical analyzer** developed as a **Compiler Design** project. The program reads a C source file, scans it character by character, identifies lexemes, and classifies them into different token categories.
 
-Objective
+---
 
-To design and implement a lexical analyzer in C that reads a C source program, scans the source code character by character, identifies lexemes, and classifies them into appropriate token categories.
+## Table of Contents
 
-Features
+- [Overview](#overview)
+- [Objective](#objective)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Requirements](#requirements)
+  - [macOS](#macos)
+  - [Windows](#windows)
+  - [Linux](#linux)
+- [How to Run](#how-to-run)
+- [Running Different Test Files](#running-different-test-files)
+- [Example Input Program](#example-input-program)
+- [Token Categories](#token-categories)
+- [Save Output to a File](#save-output-to-a-file)
+- [Recompile After Changes](#recompile-after-changes)
+- [Clean the Compiled Program](#clean-the-compiled-program)
+- [Quick Run](#quick-run)
+- [Troubleshooting](#troubleshooting)
+- [Project Workflow](#project-workflow)
+- [Author](#author)
 
-The analyzer supports:
+---
 
-* Keywords
-* Identifiers
-* Integer and floating-point constants
-* Hexadecimal constants
-* Operators
-* Delimiters / separators
-* String literals
-* Character constants
-* Single-line comments
-* Multi-line comments
-* Preprocessor directives
-* Invalid / unknown symbols
-* Line number tracking
-* Token table output
-* Reading input from a .c source file
+## Overview
 
-Project Structure
+Lexical analysis is the first phase of a compiler. It converts a source program into a sequence of **tokens** by identifying meaningful lexemes such as keywords, identifiers, constants, operators, and delimiters.
 
+This project implements a simplified lexical analyzer for the **C programming language**.
+
+The analyzer reads a `.c` source file and generates a token table containing:
+
+- Line number
+- Lexeme
+- Token type
+
+---
+
+## Objective
+
+> To design and implement a lexical analyzer in C that reads a C source program, scans the source code character by character, identifies lexemes, and classifies them into appropriate token categories.
+
+---
+
+## Features
+
+The lexical analyzer supports the following:
+
+- **Keywords**
+- **Identifiers**
+- **Integer constants**
+- **Floating-point constants**
+- **Hexadecimal constants**
+- **Operators**
+- **Delimiters / separators**
+- **String literals**
+- **Character constants**
+- **Single-line comments**
+- **Multi-line comments**
+- **Preprocessor directives**
+- **Invalid / unknown symbols**
+- **Line number tracking**
+- **Token table generation**
+- **Input from `.c` source files**
+
+---
+
+## Project Structure
+
+```text
 Lexical-Analyzer/
 │
 ├── src/
@@ -46,342 +92,660 @@ Lexical-Analyzer/
 │   └── Project_Report.pdf
 │
 └── README.md
+```
 
-Requirements
+### Directory Description
 
-macOS
+| Directory / File | Description |
+|---|---|
+| `src/` | Contains the lexical analyzer source code |
+| `src/lexical_analyzer.c` | Main C implementation |
+| `input/` | C source files used for testing |
+| `input/input.c` | Main demonstration input |
+| `input/test_keywords.c` | Keyword test cases |
+| `input/test_operators.c` | Operator test cases |
+| `input/test_invalid.c` | Invalid-symbol test cases |
+| `output/` | Stores generated output files |
+| `docs/` | Project documentation |
+| `README.md` | Project documentation and usage instructions |
+
+---
+
+# Requirements
+
+## macOS
 
 You need:
 
-* GCC / Clang compiler
-* Terminal
-* VS Code (optional, but recommended)
+- GCC / Clang compiler
+- Terminal
+- VS Code *(optional but recommended)*
 
-Check whether a C compiler is installed:
+### Check whether a C compiler is installed
 
+```bash
 gcc --version
+```
 
-If GCC is not available, install Apple’s Command Line Tools:
+macOS may use Clang behind the `gcc` command.
 
+### If a compiler is not available
+
+Install Apple's Command Line Tools:
+
+```bash
 xcode-select --install
+```
 
-Then verify again:
+Then verify:
 
+```bash
 gcc --version
+```
 
-Windows
+---
 
-Install MinGW-w64 or another GCC-compatible C compiler.
+## Windows
 
-Check:
+Install **MinGW-w64** or another GCC-compatible C compiler.
 
+Verify the installation:
+
+```bash
 gcc --version
+```
 
-Linux
+---
+
+## Linux
 
 Install GCC if required.
 
-Ubuntu/Debian:
+### Ubuntu / Debian
 
+```bash
 sudo apt update
 sudo apt install gcc
+```
 
 Verify:
 
+```bash
 gcc --version
+```
 
-How to Run
+---
 
-Step 1: Open the Project
+# How to Run
 
-Open the Lexical-Analyzer folder in VS Code.
+## Step 1 — Open the Project
 
-The terminal should be opened at the project root:
+Open the `Lexical-Analyzer` folder in VS Code.
 
+The terminal should be opened at the **project root**:
+
+```text
 Lexical-Analyzer/
+```
 
-You can verify the current location using:
+### Check the current directory
 
+```bash
 pwd
+```
 
-Then check the project files:
+### Check the project files
 
+```bash
 ls
+```
 
 You should see something similar to:
 
+```text
 input
 src
 README.md
+```
 
-Step 2: Compile the Program
+---
+
+## Step 2 — Compile the Program
 
 From the project root, run:
 
+```bash
 gcc src/lexical_analyzer.c -o lexer
+```
 
-If compilation is successful, no error message will be displayed.
+If compilation is successful, no error message should appear.
 
-You should now have an executable named:
+This creates an executable named:
 
+```text
 lexer
+```
 
-Check using:
+Check the project directory:
 
+```bash
 ls
+```
 
 Expected structure:
 
+```text
 Lexical-Analyzer/
 ├── input/
 ├── src/
 ├── lexer
 └── README.md
+```
 
-Step 3: Run the Lexical Analyzer
+> **Note:** `lexer` is a compiled executable and should normally be excluded from Git using `.gitignore`.
+
+---
+
+## Step 3 — Run the Lexical Analyzer
 
 Run:
 
+```bash
 ./lexer
+```
 
 The program will display:
 
+```text
 =============================================================
                   C LEXICAL ANALYZER
 =============================================================
+
 Enter C source file name (.c):
+```
 
 Enter the path of the C source file you want to analyze.
 
 For the main test file:
 
+```text
 input/input.c
+```
 
-Press Enter.
+Press **Enter**.
 
-Step 4: View the Token Table
+---
 
-The analyzer will display a token table similar to:
+## Step 4 — View the Token Table
 
+The analyzer displays a token table similar to:
+
+```text
 --------------------------------------------------------------------------
 LINE     LEXEME                         TOKEN TYPE
 --------------------------------------------------------------------------
 1        #include <stdio.h>             PREPROCESSOR
-3        int                            KEYWORD
-3        main                           IDENTIFIER
-3        (                              DELIMITER
-3        )                              DELIMITER
-4        {                              DELIMITER
-5        int                            KEYWORD
-5        age                            IDENTIFIER
-5        =                              OPERATOR
-5        20                             CONSTANT
-5        ;                              DELIMITER
-6        float                          KEYWORD
-6        marks                          IDENTIFIER
-6        =                              OPERATOR
-6        95.5f                          CONSTANT
-6        ;                              DELIMITER
+3        int                             KEYWORD
+3        main                            IDENTIFIER
+3        (                               DELIMITER
+3        )                               DELIMITER
+4        {                               DELIMITER
+5        int                             KEYWORD
+5        age                             IDENTIFIER
+5        =                               OPERATOR
+5        20                              CONSTANT
+5        ;                               DELIMITER
+6        float                           KEYWORD
+6        marks                           IDENTIFIER
+6        =                               OPERATOR
+6        95.5f                           CONSTANT
+6        ;                               DELIMITER
 ...
+```
 
-Running Different Test Files
+Each token contains:
 
-Test Keywords
+```text
+LINE NUMBER
+     +
+  LEXEME
+     +
+TOKEN TYPE
+```
 
+---
+
+# Running Different Test Files
+
+## Test Keywords
+
+Run:
+
+```bash
 ./lexer
+```
 
 Enter:
 
+```text
 input/test_keywords.c
+```
 
-Test Operators
+---
 
+## Test Operators
+
+Run:
+
+```bash
 ./lexer
+```
 
 Enter:
 
+```text
 input/test_operators.c
+```
 
-Test Invalid Symbols
+---
 
+## Test Invalid Symbols
+
+Run:
+
+```bash
 ./lexer
+```
 
 Enter:
 
+```text
 input/test_invalid.c
+```
 
-Example Input Program
+---
 
-input/input.c may contain:
+# Example Input Program
 
+The main test program `input/input.c` may contain:
+
+```c
 #include <stdio.h>
+
 int main()
 {
     int age = 20;
     float marks = 95.5f;
     char grade = 'A';
+
     // Calculate result
     age = age + 5;
+
     /*
        This is a
        multi-line comment
     */
+
     if (marks >= 50.0)
     {
         printf("Age = %d\n", age);
         printf("Grade = %c\n", grade);
     }
+
     return 0;
 }
+```
 
-Token Categories
+This example demonstrates:
 
-Token Type	Examples
-Keyword	int, float, if, return
-Identifier	main, age, marks
-Constant	10, 95.5, 0xFF
-Operator	+, -, =, ==, >=, ++
-Delimiter	(, ), {, }, ;, ,
-String Literal	"Hello"
-Character Constant	'A', '\n'
-Single-Line Comment	// comment
-Multi-Line Comment	/* comment */
-Preprocessor	#include <stdio.h>
-Invalid / Unknown	Unrecognized characters
+- Preprocessor directive
+- Keywords
+- Identifiers
+- Integer constant
+- Floating-point constant
+- Character constant
+- Operators
+- Delimiters
+- String literals
+- Single-line comments
+- Multi-line comments
 
-Optional: Save Output to a File
+---
 
-You can redirect the terminal output to a file:
+# Token Categories
 
+| Token Type | Examples |
+|---|---|
+| **Keyword** | `int`, `float`, `if`, `return` |
+| **Identifier** | `main`, `age`, `marks` |
+| **Constant** | `10`, `95.5`, `0xFF` |
+| **Operator** | `+`, `-`, `=`, `==`, `>=`, `++` |
+| **Delimiter** | `(`, `)`, `{`, `}`, `;`, `,` |
+| **String Literal** | `"Hello"` |
+| **Character Constant** | `'A'`, `'\n'` |
+| **Single-Line Comment** | `// comment` |
+| **Multi-Line Comment** | `/* comment */` |
+| **Preprocessor** | `#include <stdio.h>` |
+| **Invalid / Unknown** | Unrecognized characters |
+
+---
+
+# Save Output to a File
+
+The program output can be redirected from the terminal to a text file.
+
+Run:
+
+```bash
 ./lexer > output/token_output.txt
+```
 
-Then open:
+The generated file will be:
 
+```text
 output/token_output.txt
+```
 
-This stores the lexical analysis results in a text file.
+You can then open it using VS Code or any text editor.
 
-Recompile After Making Changes
+### Important
 
-Whenever you modify lexical_analyzer.c, compile again:
+When using output redirection, the program's prompt and token table are also redirected to the file.
 
+---
+
+# Recompile After Changes
+
+Whenever you modify:
+
+```text
+src/lexical_analyzer.c
+```
+
+compile the program again:
+
+```bash
 gcc src/lexical_analyzer.c -o lexer
+```
 
 Then run:
 
+```bash
 ./lexer
+```
 
-Clean the Compiled Program
+---
 
-To remove the generated executable:
+# Clean the Compiled Program
 
+To remove the compiled executable:
+
+```bash
 rm lexer
+```
 
-Then compile again whenever needed:
+Then compile again when needed:
 
+```bash
 gcc src/lexical_analyzer.c -o lexer
+```
 
-Complete Quick Run
+---
 
-For normal use, these are the only commands you need:
+# Quick Run
 
+For normal use, the complete process is:
+
+```bash
 gcc src/lexical_analyzer.c -o lexer
 ./lexer
+```
 
 When prompted:
 
+```text
 Enter C source file name (.c):
+```
 
 enter:
 
+```text
 input/input.c
+```
 
-Troubleshooting
+That's all that is required for a normal run.
 
-gcc: command not found
+---
 
-On macOS:
+# Troubleshooting
 
+## `gcc: command not found`
+
+### macOS
+
+Install Apple's Command Line Tools:
+
+```bash
 xcode-select --install
+```
 
-On Ubuntu/Debian:
+Then:
 
+```bash
+gcc --version
+```
+
+### Ubuntu / Debian
+
+```bash
+sudo apt update
 sudo apt install gcc
+```
 
-No such file or directory
+Then:
 
-Make sure you are in the project root:
+```bash
+gcc --version
+```
 
+---
+
+## `No such file or directory`
+
+Make sure you are inside the project root.
+
+Check:
+
+```bash
 pwd
+```
 
-Then verify:
+Then:
 
+```bash
 ls
+```
 
 You should see:
 
+```text
 input
 src
+README.md
+```
 
 Use the correct source-file path:
 
+```text
 input/input.c
+```
 
-Unable to open file
+---
 
-Check that the file actually exists:
+## `Unable to open file`
 
+Check whether the input files exist:
+
+```bash
 ls input
+```
 
 You should see:
 
+```text
 input.c
 test_keywords.c
 test_operators.c
 test_invalid.c
+```
 
-Project Workflow
+If the file is located somewhere else, provide its correct path when the analyzer asks for the filename.
 
-               C Source File
-                     |
-                     v
-             Read Character
-                     |
-                     v
-             Identify Lexeme
-                     |
-          +----------+----------+
-          |          |          |
-          v          v          v
-       Keyword   Identifier   Constant
-          |          |          |
-          +----------+----------+
-                     |
-                     v
-                Operators
-                     |
-                     v
-                Delimiters
-                     |
-                     v
-          Strings / Characters
-                     |
-                     v
-                 Comments
-                     |
-                     v
-            Invalid Characters
-                     |
-                     v
-               Token Table
-                     |
-                     v
-                  Output
+---
 
-Author
+## Permission Denied on `./lexer`
 
-C Lexical Analyzer — Compiler Design Project
+On macOS/Linux, try:
 
-Language: C
+```bash
+chmod +x lexer
+```
 
-Purpose: Educational implementation of lexical analysis
+Then:
+
+```bash
+./lexer
+```
+
+---
+
+# Project Workflow
+
+The lexical analysis process implemented by this project can be represented as:
+
+```text
+                    C SOURCE FILE
+                           |
+                           v
+                  +----------------+
+                  | Read Character |
+                  +----------------+
+                           |
+                           v
+                  +----------------+
+                  | Identify       |
+                  | Lexeme         |
+                  +----------------+
+                           |
+                           v
+              +------------+------------+
+              |            |            |
+              v            v            v
+          Keyword      Identifier    Constant
+              |            |            |
+              +------------+------------+
+                           |
+                           v
+                       Operators
+                           |
+                           v
+                      Delimiters
+                           |
+                           v
+                  Strings / Characters
+                           |
+                           v
+                       Comments
+                           |
+                           v
+                 Invalid Characters
+                           |
+                           v
+                    +-------------+
+                    | Token Table |
+                    +-------------+
+                           |
+                           v
+                        OUTPUT
+```
+
+---
+
+# Tokenization Flow
+
+The analyzer broadly follows this process:
+
+```text
+Input C Program
+      |
+      v
+Read character
+      |
+      v
+Is it whitespace?
+   /        \
+ Yes         No
+  |           |
+Skip          v
+        Identify character
+              |
+     +--------+--------+
+     |        |        |
+     v        v        v
+  Letter    Digit   Special Symbol
+     |        |        |
+     v        v        v
+Keyword   Constant   Operator /
+or ID                Delimiter /
+                     String /
+                     Comment
+              |
+              v
+          Token Table
+```
+
+---
+
+# Example
+
+Given the following source code:
+
+```c
+int x = 10;
+```
+
+The lexical analyzer produces:
+
+| Line | Lexeme | Token Type |
+|---:|---|---|
+| 1 | `int` | KEYWORD |
+| 1 | `x` | IDENTIFIER |
+| 1 | `=` | OPERATOR |
+| 1 | `10` | CONSTANT |
+| 1 | `;` | DELIMITER |
+
+---
+
+# Educational Purpose
+
+This project demonstrates the fundamental concepts of **lexical analysis**, including:
+
+1. Reading source code character by character
+2. Recognizing lexemes
+3. Classifying lexemes into tokens
+4. Tracking source-code line numbers
+5. Handling comments and literals
+6. Detecting invalid symbols
+7. Generating a structured token table
+
+It is intended for educational use in **Compiler Design / Compiler Construction** coursework.
+
+---
+
+# Author
+
+**C Lexical Analyzer — Compiler Design Project**
+
+**Language:** C
+
+**Purpose:** Educational implementation of lexical analysis.
